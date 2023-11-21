@@ -12,8 +12,8 @@ Discrete_Mathematics_Course_Assignments
 
 ## 集成开发环境
 
-* Microsoft Visual Studio
+* Microsoft Visual Studio 2022
 
 ## 文档更新日期
 
-2023年9月24日
+2023年11月21日
