@@ -8,7 +8,7 @@ Discrete_Mathematics_Course_Assignments
 
 A collection of my discrete mathematics course assignments.
 
-> Relevant courses
+> Relevant course
 > * Discrete Mathematics (同济大学离散数学)
 
 ## 解决方案项目组成
