@@ -6,7 +6,10 @@ Discrete_Mathematics_Course_Assignments
 
 ## 解决方案简介
 
-`Discrete_Mathematics_Course_Assignments` is a collection of my discrete mathematics course assignments.
+A collection of my discrete mathematics course assignments.
+
+> Relevant courses
+> * Discrete Mathematics (同济大学离散数学)
 
 ## 解决方案项目组成
 
@@ -16,4 +19,4 @@ Discrete_Mathematics_Course_Assignments
 
 ## 文档更新日期
 
-2023年11月21日
+2023年11月24日
