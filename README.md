@@ -19,4 +19,4 @@ A collection of my discrete mathematics course assignments.
 
 ## 文档更新日期
 
-2023年11月24日
+2023年11月25日
