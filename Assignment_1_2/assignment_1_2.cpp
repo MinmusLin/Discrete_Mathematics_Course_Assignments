@@ -1,7 +1,7 @@
 /****************************************************************
- * Project Name:  Assignment_6
- * File Name:     assignment_6.cpp
- * File Function: Warshall算法求解传递闭包
+ * Project Name:  Assignment_1_2
+ * File Name:     assignment_1_2.cpp
+ * File Function: 真值表、主范式
  * Author:        Jishen Lin (林继申)
  * Update Date:   2023/12/2
  ****************************************************************/

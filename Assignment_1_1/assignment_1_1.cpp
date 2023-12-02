@@ -1,7 +1,7 @@
 /****************************************************************
- * Project Name:  Assignment_1
- * File Name:     assignment_1.cpp
- * File Function: 命题逻辑联接词、真值表、主范式
+ * Project Name:  Assignment_1_1
+ * File Name:     assignment_1_1.cpp
+ * File Function: 命题逻辑联接词
  * Author:        Jishen Lin (林继申)
  * Update Date:   2023/12/2
  ****************************************************************/
