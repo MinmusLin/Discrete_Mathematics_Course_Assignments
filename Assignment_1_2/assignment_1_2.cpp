@@ -3,7 +3,7 @@
  * File Name:     assignment_1_2.cpp
  * File Function: 真值表、主范式
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/2
+ * Update Date:   2023/12/3
  ****************************************************************/
 
 #include <iostream>
@@ -363,6 +363,75 @@ std::string replaceSymbols(std::string input)
 }
 
 /*
+ * Function Name:    isValidExpression
+ * Function:         Check if a expression is valid
+ * Input Parameters: const std::string& expression
+ * Return Value:     true / false
+ */
+bool isValidExpression(const std::string& expression)
+{
+    if (expression.empty()) {
+        std::cout << ">>> 命题公式为空，请重新输入！" << std::endl;
+        return false;
+    }
+    std::stack<char> parentheses;
+    char previous = '\0';
+    for (char ch : expression) {
+        if (!isalpha(ch) && !isOperator(ch) && ch != '(' && ch != ')') {
+            std::cout << ">>> 命题公式存在非法字符输入，请重新输入！" << std::endl;
+            return false;
+        }
+        if (previous == '\0' && (ch == '&' || ch == '|' || ch == '~' || ch == '^')) {
+            std::cout << ">>> 命题公式不能以二元运算符开始，请重新输入！" << std::endl;
+            return false;
+        }
+        if (previous == '(' && ch == ')') {
+            std::cout << ">>> 命题公式存在空括号，请重新输入！" << std::endl;
+            return false;
+        }
+        if (previous == '!' && ch == '!') {
+            std::cout << ">>> 命题公式存在不合法的连续取非操作，请重新输入！" << std::endl;
+            return false;
+        }
+        if (ch == '!' && isalpha(previous)) {
+            std::cout << ">>> 命题公式中取非运算符前不可连接变量，请重新输入！" << std::endl;
+            return false;
+        }
+        if ((isalpha(ch) && previous == ')') || (ch == '(' && isalpha(previous))) {
+            std::cout << ">>> 命题公式中变量与括号的连接不正确，请重新输入！" << std::endl;
+            return false;
+        }
+        if (ch == '(')
+            parentheses.push(ch);
+        else if (ch == ')') {
+            if (parentheses.empty()) {
+                std::cout << ">>> 命题公式括号不匹配，请重新输入！" << std::endl;
+                return false;
+            }
+            parentheses.pop();
+        }
+        if (isalpha(ch) && isalpha(previous)) {
+            std::cout << ">>> 命题公式仅适用于单字符变量，不适用于多字符变量，请重新输入！" << std::endl;
+            return false;
+        }
+        if ((ch == '&' || ch == '|' || ch == '~' || ch == '^') && (!isalpha(previous) && previous != ')')) {
+            std::cout << ">>> 命题公式中每个二元运算符前后必须连接变量，请重新输入！" << std::endl;
+            return false;
+        }
+        previous = ch;
+    }
+    if (previous == '&' || previous == '|' || previous == '~' || previous == '^' || previous == '!') {
+        std::cout << ">>> 命题公式不能以运算符结尾，请重新输入！" << std::endl;
+        return false;
+    }
+    if (!parentheses.empty()) {
+        std::cout << ">>> 命题公式括号不匹配，请重新输入！" << std::endl;
+        return false;
+    }
+    return true;
+}
+
+/*
  * Function Name:    main
  * Function:         Main function
  * Return Value:     0
@@ -374,22 +443,25 @@ int main()
     std::cout << "|          真值表、主范式           |" << std::endl;
     std::cout << "|  Truth Table and Prime Implicant  |" << std::endl;
     std::cout << "+-----------------------------------+" << std::endl << std::endl;
-    std::cout << ">>> 命题公式运算符号输入要求" << std::endl;
+    std::cout << ">>> 命题公式输入要求" << std::endl;
     std::cout << "    [1] 字符 '!' 表示非（Negation）" << std::endl;
     std::cout << "    [2] 字符 '&' 表示与（Conjunction）" << std::endl;
     std::cout << "    [3] 字符 '|' 表示或（Disjunction）" << std::endl;
     std::cout << "    [4] 字符 '^' 表示蕴含（Implication）" << std::endl;
-    std::cout << "    [5] 字符 '~' 表示等值（Equivalence）" << std::endl << std::endl;
-    std::cout << ">>> 命题公式格式输入要求" << std::endl;
-    std::cout << "    [1] 符合命题公式运算符号输入要求" << std::endl << std::endl;
+    std::cout << "    [5] 字符 '~' 表示等值（Equivalence）" << std::endl;
+    std::cout << "    [6] 命题公式中只存在以下 59 种字符: a-z A-Z ! & | ^ ~ ( )" << std::endl;
+    std::cout << "    [7] 命题公式中的括号嵌套匹配" << std::endl;
+    std::cout << "    [8] 命题公式仅适用于单字符变量，不适用于多字符变量" << std::endl;
+    std::cout << "    [9] 命题公式中每个运算符前后必须连接变量（\"!!a\"请输入为\"!(!a)\"）" << std::endl;
 
     /* Input a a propositional formula */
-    std::cout << "请输入命题公式: ";
     std::string expression;
-    std::cin >> expression;
-    std::cout << std::endl << ">>> 命题公式: " << replaceSymbols(expression) << std::endl;
-    // (!a^b)~((((c|d)~(!b&c))^!d)|a)
-    // https://truth.yunser.com
+    do {
+        std::cout << std::endl << "请输入命题公式: ";
+        std::cin >> expression;
+        std::cout << std::endl;
+    } while (!isValidExpression(expression));
+    std::cout << ">>> 命题公式: " << replaceSymbols(expression) << std::endl;
 
     /* Output truth table and normal forms (CNF and DNF) */
     outputTruthTableAndNormalForms(expression);

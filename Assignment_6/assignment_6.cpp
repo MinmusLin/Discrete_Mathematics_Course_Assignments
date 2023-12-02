@@ -3,7 +3,7 @@
  * File Name:     assignment_6.cpp
  * File Function: Warshall算法求解传递闭包
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/2
+ * Update Date:   2023/12/3
  ****************************************************************/
 
 #include <iostream>

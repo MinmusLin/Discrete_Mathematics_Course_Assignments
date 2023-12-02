@@ -29,7 +29,7 @@ A collection of my discrete mathematics course assignments.
 最小生成树
 
 * [Assignment 5](Assignment_5)
-最优二元树在通信编码中的应用
+最优二元树
 
 * [Assignment 6](Assignment_6)
 Warshall算法求解传递闭包
@@ -40,4 +40,4 @@ Warshall算法求解传递闭包
 
 ## 文档更新日期
 
-2023年12月2日
+2023年12月3日

@@ -3,7 +3,7 @@
  * File Name:     assignment_3.cpp
  * File Function: 关系的自反、对称、传递闭包
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/2
+ * Update Date:   2023/12/3
  ****************************************************************/
 
 #include <iostream>
