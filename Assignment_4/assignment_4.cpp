@@ -215,47 +215,67 @@ int inputStartVertex(int vertex)
 }
 
 /*
+ * Function Name:    inputLogicalValue
+ * Function:         Input logical value
+ * Input Parameters: char falseValue
+ *                   char trueValue
+ * Return Value:     true / false
+ */
+bool inputLogicalValue(char falseValue = '0', char trueValue = '1')
+{
+    while (true) {
+        char optn = _getch();
+        if (optn == 0 || optn == -32)
+            optn = _getch();
+        else if (optn == falseValue || optn == trueValue) {
+            std::cout << optn << std::endl << std::endl;
+            return optn == falseValue ? false : true;
+        }
+    }
+}
+
+/*
  * Function Name:    main
  * Function:         Main function
  * Return Value:     0
  */
 int main()
 {
-    /* System entry prompt */
-    std::cout << "+-------------------------+" << std::endl;
-    std::cout << "|       最小生成树        |" << std::endl;
-    std::cout << "|  Minimum Spanning Tree  |" << std::endl;
-    std::cout << "+-------------------------+" << std::endl;
+    do {
+        /* System entry prompt */
+        system("cls");
+        std::cout << "+-------------------------+" << std::endl;
+        std::cout << "|       最小生成树        |" << std::endl;
+        std::cout << "|  Minimum Spanning Tree  |" << std::endl;
+        std::cout << "+-------------------------+" << std::endl;
 
-    /* Establish road network */
-    std::cout << std::endl << ">>> 请创建路网" << std::endl << std::endl;
-    int vertex = inputInteger(2, 'Z' - 'A' + 1, "城市（路网节点）个数");
-    MinimumSpanningTree MST(vertex);
-    std::cout << std::endl << ">>> 城市（路网节点）A";
-    for (int i = 1; i < vertex; i++)
-        std::cout << "、" << static_cast<char>(i + 'A');
-    std::cout << " 创建成功" << std::endl;
+        /* Establish road network */
+        std::cout << std::endl << ">>> 请创建路网" << std::endl << std::endl;
+        int vertex = inputInteger(2, 'Z' - 'A' + 1, "城市（路网节点）个数");
+        MinimumSpanningTree MST(vertex);
+        std::cout << std::endl << ">>> 城市（路网节点）A";
+        for (int i = 1; i < vertex; i++)
+            std::cout << "、" << static_cast<char>(i + 'A');
+        std::cout << " 创建成功" << std::endl;
 
-    /* Input the distance between any two cities */
-    std::cout << std::endl << ">>> 请输入任意两个城市（路网节点）之间的距离" << std::endl;
-    std::cout << std::endl << ">>> 若两个城市（路网节点）之间没有路请输入 " << SHRT_MAX << " 表示输入上限" << std::endl << std::endl;
-    for (int i = 0; i < vertex; i++)
-        for (int j = i + 1; j < vertex; j++) {
-            char tmp[64];
-            sprintf(tmp, "城市（路网节点）%c 和 %c 之间的距离", i + 'A', j + 'A');
-            MST.setWeight(i, j, inputInteger(1, SHRT_MAX, tmp));
-        }
+        /* Input the distance between any two cities */
+        std::cout << std::endl << ">>> 请输入任意两个城市（路网节点）之间的距离" << std::endl;
+        std::cout << std::endl << ">>> 若两个城市（路网节点）之间没有路请输入 " << SHRT_MAX << " 表示输入上限" << std::endl << std::endl;
+        for (int i = 0; i < vertex; i++)
+            for (int j = i + 1; j < vertex; j++) {
+                char tmp[64];
+                sprintf(tmp, "城市（路网节点）%c 和 %c 之间的距离", i + 'A', j + 'A');
+                MST.setWeight(i, j, inputInteger(1, SHRT_MAX, tmp));
+            }
 
-    /* Generate minimum spanning tree using Prim algorithm */
-    int startVertex = inputStartVertex(vertex);
-    std::cout << ">>> 建立 Prim 最小生成树:" << std::endl << std::endl;
-    MST.primMST(startVertex);
+        /* Generate minimum spanning tree using Prim algorithm */
+        int startVertex = inputStartVertex(vertex);
+        std::cout << ">>> 建立 Prim 最小生成树:" << std::endl << std::endl;
+        MST.primMST(startVertex);
+        std::cout << std::endl;
 
-    /* Wait for enter to quit */
-    std::cout << std::endl << "Press Enter to Quit" << std::endl;
-    while (_getch() != '\r')
-        continue;
-
-    /* Program ends */
+        /* Whether to exit the program */
+        std::cout << "是否退出程序 [y/n]: ";
+    } while (!inputLogicalValue('n', 'y'));
     return 0;
 }

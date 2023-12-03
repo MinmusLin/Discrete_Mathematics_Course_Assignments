@@ -3,7 +3,7 @@
  * File Name:     assignment_1_1.cpp
  * File Function: 命题逻辑联接词
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/2
+ * Update Date:   2023/12/3
  ****************************************************************/
 
 #include <iostream>

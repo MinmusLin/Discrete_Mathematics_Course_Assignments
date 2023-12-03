@@ -432,45 +432,64 @@ bool isValidExpression(const std::string& expression)
 }
 
 /*
+ * Function Name:    inputLogicalValue
+ * Function:         Input logical value
+ * Input Parameters: char falseValue
+ *                   char trueValue
+ * Return Value:     true / false
+ */
+bool inputLogicalValue(char falseValue = '0', char trueValue = '1')
+{
+    while (true) {
+        char optn = _getch();
+        if (optn == 0 || optn == -32)
+            optn = _getch();
+        else if (optn == falseValue || optn == trueValue) {
+            std::cout << optn << std::endl << std::endl;
+            return optn == falseValue ? false : true;
+        }
+    }
+}
+
+/*
  * Function Name:    main
  * Function:         Main function
  * Return Value:     0
  */
 int main()
 {
-    /* System entry prompt */
-    std::cout << "+-----------------------------------+" << std::endl;
-    std::cout << "|          真值表、主范式           |" << std::endl;
-    std::cout << "|  Truth Table and Prime Implicant  |" << std::endl;
-    std::cout << "+-----------------------------------+" << std::endl << std::endl;
-    std::cout << ">>> 命题公式输入要求" << std::endl;
-    std::cout << "    [1] 字符 '!' 表示非（Negation）" << std::endl;
-    std::cout << "    [2] 字符 '&' 表示与（Conjunction）" << std::endl;
-    std::cout << "    [3] 字符 '|' 表示或（Disjunction）" << std::endl;
-    std::cout << "    [4] 字符 '^' 表示蕴含（Implication）" << std::endl;
-    std::cout << "    [5] 字符 '~' 表示等值（Equivalence）" << std::endl;
-    std::cout << "    [6] 命题公式中只存在以下 59 种字符: a-z A-Z ! & | ^ ~ ( )" << std::endl;
-    std::cout << "    [7] 命题公式中的括号嵌套匹配" << std::endl;
-    std::cout << "    [8] 命题公式仅适用于单字符变量，不适用于多字符变量" << std::endl;
-    std::cout << "    [9] 命题公式中每个运算符前后必须连接变量（\"!!a\"请输入为\"!(!a)\"）" << std::endl;
-
-    /* Input a a propositional formula */
-    std::string expression;
     do {
-        std::cout << std::endl << "请输入命题公式: ";
-        std::cin >> expression;
-        std::cout << std::endl;
-    } while (!isValidExpression(expression));
-    std::cout << ">>> 命题公式: " << replaceSymbols(expression) << std::endl;
+        /* System entry prompt */
+        system("cls");
+        std::cout << "+-----------------------------------+" << std::endl;
+        std::cout << "|          真值表、主范式           |" << std::endl;
+        std::cout << "|  Truth Table and Prime Implicant  |" << std::endl;
+        std::cout << "+-----------------------------------+" << std::endl << std::endl;
+        std::cout << ">>> 命题公式输入要求" << std::endl;
+        std::cout << "    [1] 字符 '!' 表示非（Negation）" << std::endl;
+        std::cout << "    [2] 字符 '&' 表示与（Conjunction）" << std::endl;
+        std::cout << "    [3] 字符 '|' 表示或（Disjunction）" << std::endl;
+        std::cout << "    [4] 字符 '^' 表示蕴含（Implication）" << std::endl;
+        std::cout << "    [5] 字符 '~' 表示等值（Equivalence）" << std::endl;
+        std::cout << "    [6] 命题公式中只存在以下 59 种字符: a-z A-Z ! & | ^ ~ ( )" << std::endl;
+        std::cout << "    [7] 命题公式中的括号嵌套匹配" << std::endl;
+        std::cout << "    [8] 命题公式仅适用于单字符变量，不适用于多字符变量" << std::endl;
+        std::cout << "    [9] 命题公式中每个运算符前后必须连接变量（\"!!a\"请输入为\"!(!a)\"）" << std::endl;
 
-    /* Output truth table and normal forms (CNF and DNF) */
-    outputTruthTableAndNormalForms(expression);
+        /* Input a a propositional formula */
+        std::string expression;
+        do {
+            std::cout << std::endl << "请输入命题公式: ";
+            std::cin >> expression;
+            std::cout << std::endl;
+        } while (!isValidExpression(expression));
+        std::cout << ">>> 命题公式: " << replaceSymbols(expression) << std::endl;
 
-    /* Wait for enter to quit */
-    std::cout << "Press Enter to Quit" << std::endl;
-    while (_getch() != '\r')
-        continue;
+        /* Output truth table and normal forms (CNF and DNF) */
+        outputTruthTableAndNormalForms(expression);
 
-    /* Program ends */
+        /* Whether to exit the program */
+        std::cout << "是否退出程序 [y/n]: ";
+    } while (!inputLogicalValue('n', 'y'));
     return 0;
 }
