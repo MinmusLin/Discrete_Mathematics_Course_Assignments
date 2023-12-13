@@ -3,7 +3,7 @@
  * File Name:     assignment_2.cpp
  * File Function: 命题逻辑推理
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/3
+ * Update Date:   2023/12/13
  ****************************************************************/
 
 #include <iostream>
@@ -44,8 +44,10 @@ int main()
         bool C = i & 0b100;
         bool D = i & 0b1000;
         bool E = i & 0b10000;
-        if ((A || B) && (!A || C) && (!D || E) && (D || !C) && !E)
-            std::cout << ">>> 命题逻辑推理结果: A = " << (A ? "True" : "False") << ", B = " << (B ? "True" : "False") << std::endl;
+        if ((A || B) && (!A || C) && (!D || E) && (D || !C) && !E) {
+            std::cout << ">>> 命题逻辑推理结果: A = " << (A ? "True" : "False") << ", B = " << (B ? "True" : "False") << std::endl << std::endl;
+            std::cout << ">>> 所以营业员 " << (A ? "A" : "") << (B ? "B" : "") << " 偷了手表" << std::endl;
+        }
     }
 
     /* Wait for enter to quit */

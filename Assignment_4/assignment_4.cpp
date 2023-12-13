@@ -3,7 +3,7 @@
  * File Name:     assignment_4.cpp
  * File Function: 最小生成树
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/3
+ * Update Date:   2023/12/13
  ****************************************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -11,27 +11,70 @@
 #include <iostream>
 #include <limits>
 #include <conio.h>
+#include <vector>
+#include <algorithm>
 
 /* Macro definitions */
 #define MEMORY_ALLOCATION_ERROR -1
 #define INF INT_MAX
+
+/* Define Edge structure */
+struct Edge {
+    int src;
+    int dst;
+    int weight;
+    bool operator<(const Edge& other) const { return this->weight < other.weight; }
+};
 
 /* Define MinimumSpanningTree class */
 class MinimumSpanningTree {
 private:
     int vertex;
     int** graph;
-    int* parent;
-    int* key;
-    bool* mstSet;
+    std::vector<Edge> edges;
+    std::vector<int> parent;
+    std::vector<int> rank;
+    int findSet(int i);
+    void unionSets(int x, int y);
 public:
     MinimumSpanningTree(int V);
     ~MinimumSpanningTree();
-    int minKey(void);
-    void printMST(int startVertex);
-    void primMST(int startVertex);
+    void kruskalMST(void);
     void setWeight(int src, int dst, int weight);
 };
+
+/*
+ * Function Name:    findSet
+ * Function:         Find in Union-Find
+ * Input Parameters: int i
+ * Notes:            Class external implementation of member functions
+ */
+int MinimumSpanningTree::findSet(int i)
+{
+    if (parent[i] != i)
+        parent[i] = findSet(parent[i]);
+    return parent[i];
+}
+
+/*
+ * Function Name:    unionSets
+ * Function:         Union in Union-Find
+ * Input Parameters: int x
+ *                   int y
+ * Notes:            Class external implementation of member functions
+ */
+void MinimumSpanningTree::unionSets(int x, int y)
+{
+    int xroot = findSet(x), yroot = findSet(y);
+    if (rank[xroot] < rank[yroot])
+        parent[xroot] = yroot;
+    else if (rank[xroot] > rank[yroot])
+        parent[yroot] = xroot;
+    else {
+        parent[yroot] = xroot;
+        rank[xroot]++;
+    }
+}
 
 /*
  * Function Name:    MinimumSpanningTree
@@ -57,21 +100,6 @@ MinimumSpanningTree::MinimumSpanningTree(int V)
     for (int i = 0; i < vertex; i++)
         for (int j = 0; j < vertex; j++)
             graph[i][j] = 0;
-    parent = new(std::nothrow) int[vertex];
-    if (parent == NULL) {
-        std::cerr << "Error: Memory allocation failed." << std::endl;
-        exit(MEMORY_ALLOCATION_ERROR);
-    }
-    key = new(std::nothrow) int[vertex];
-    if (key == NULL) {
-        std::cerr << "Error: Memory allocation failed." << std::endl;
-        exit(MEMORY_ALLOCATION_ERROR);
-    }
-    mstSet = new(std::nothrow) bool[vertex];
-    if (mstSet == NULL) {
-        std::cerr << "Error: Memory allocation failed." << std::endl;
-        exit(MEMORY_ALLOCATION_ERROR);
-    }
 }
 
 /*
@@ -84,72 +112,44 @@ MinimumSpanningTree::~MinimumSpanningTree()
     for (int i = 0; i < vertex; i++)
         delete[] graph[i];
     delete[] graph;
-    delete[] parent;
-    delete[] key;
-    delete[] mstSet;
 }
 
 /*
- * Function Name:    minKey
- * Function:         Find the edge with the minimum weight
+ * Function Name:    kruskalMST
+ * Function:         Generate minimum spanning tree using Kruskal algorithm
  * Input Parameters: void
- * Return Value:     the edge with the minimum weight
+ * Return Value:     void
  */
-int MinimumSpanningTree::minKey(void)
+void MinimumSpanningTree::kruskalMST(void)
 {
-    int minVal = INF, minIndex = -1;
-    for (int i = 0; i < vertex; i++) {
-        if (!mstSet[i] && key[i] < minVal) {
-            minVal = key[i];
-            minIndex = i;
+    /* Initialize parent and rank arrays for Union-Find */
+    parent.resize(vertex);
+    rank.resize(vertex, 0);
+    for (int i = 0; i < vertex; ++i) {
+        parent[i] = i;
+    }
+
+    /* Sort all edges in ascending order of their weights */
+    std::sort(edges.begin(), edges.end());
+    std::vector<Edge> result; // Stores the edges in the MST
+    int count = 0; // Keeps track of the number of edges added to the MST
+
+    /* Iterate through all edges */
+    for (const auto& edge : edges) {
+        int x = findSet(edge.src); // Find the set of the source vertex
+        int y = findSet(edge.dst); // Find the set of the destination vertex
+        if (x != y) {
+            result.push_back(edge);
+            unionSets(x, y);
+            count++;
+            if (count == vertex - 1)
+                break;
         }
     }
-    return minIndex;
-}
 
-/*
- * Function Name:    printMST
- * Function:         Print minimum spanning tree (MST)
- * Input Parameters: int startVertex
- * Return Value:     void
- */
-void MinimumSpanningTree::printMST(int startVertex)
-{
-    for (int i = startVertex + 1; i < vertex + startVertex; i++)
-        std::cout << static_cast<char>(parent[i % vertex] + 'A') << " --(" << graph[i % vertex][parent[i % vertex]] << ")--> " << static_cast<char>(i % vertex + 'A') << std::endl;
-}
-
-/*
- * Function Name:    primMST
- * Function:         Generate minimum spanning tree using Prim algorithm
- * Input Parameters: int startVertex
- * Return Value:     void
- */
-void MinimumSpanningTree::primMST(int startVertex)
-{
-    /* Initialize all keys as infinite and mstSet as false */
-    for (int i = 0; i < vertex; i++) {
-        key[i] = INF;
-        mstSet[i] = false;
-    }
-
-    /* Initialize the starting vertex in MST */
-    key[startVertex] = 0;
-    parent[startVertex] = -1;
-
-    /* Prim algorithm */
-    for (int count = 0; count < vertex; count++) {
-        int u = minKey();
-        mstSet[u] = true; // Add the picked vertex to the MST Set
-        for (int v = 0; v < vertex; v++)
-            if (graph[u][v] && !mstSet[v] && graph[u][v] < key[v]) {
-                parent[v] = u;
-                key[v] = graph[u][v];
-            }
-    }
-
-    /* Print the constructed minimum spanning tree (MST) */
-    printMST(startVertex);
+    /* Print the edges in the MST */
+    for (const auto& edge : result)
+        std::cout << static_cast<char>(edge.src + 'A') << " --(" << edge.weight << ")--> " << static_cast<char>(edge.dst + 'A') << std::endl;
 }
 
 /*
@@ -164,6 +164,7 @@ void MinimumSpanningTree::setWeight(int src, int dst, int weight)
 {
     graph[src][dst] = weight;
     graph[dst][src] = weight;
+    edges.push_back({ src, dst, weight });
 }
 
 /*
@@ -189,27 +190,6 @@ int inputInteger(int lowerLimit, int upperLimit, const char* prompt)
             std::cerr << std::endl << ">>> " << prompt << "输入不合法，请重新输入" << prompt << "！" << std::endl << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        }
-    }
-}
-
-/*
- * Function Name:    inputStartVertex
- * Function:         Input start vertex
- * Input Parameters: int vertex
- * Return Value:     start vertex
- */
-int inputStartVertex(int vertex)
-{
-    std::cout << std::endl << "请输入建立最小生成树的起始节点 [输入范围: A~" << static_cast<char>(vertex + 'A' - 1) << "]: ";
-    char optn;
-    while (true) {
-        optn = _getch();
-        if (optn == 0 || optn == -32)
-            optn = _getch();
-        else if (optn >= 'A' && optn <= vertex + 'A' - 1) {
-            std::cout << optn << std::endl << std::endl;
-            return optn - 'A';
         }
     }
 }
@@ -268,10 +248,9 @@ int main()
                 MST.setWeight(i, j, inputInteger(1, SHRT_MAX, tmp));
             }
 
-        /* Generate minimum spanning tree using Prim algorithm */
-        int startVertex = inputStartVertex(vertex);
-        std::cout << ">>> 建立 Prim 最小生成树:" << std::endl << std::endl;
-        MST.primMST(startVertex);
+        /* Generate minimum spanning tree using Kruskal algorithm */
+        std::cout << std::endl << ">>> 建立 Kruskal 最小生成树:" << std::endl << std::endl;
+        MST.kruskalMST();
         std::cout << std::endl;
 
         /* Whether to exit the program */

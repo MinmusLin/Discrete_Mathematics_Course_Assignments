@@ -3,7 +3,7 @@
  * File Name:     assignment_3.cpp
  * File Function: 关系的自反、对称、传递闭包
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/3
+ * Update Date:   2023/12/13
  ****************************************************************/
 
 #include <iostream>
@@ -47,6 +47,23 @@ Matrix symmetricClosure(const Matrix matrix)
 }
 
 /*
+ * Function Name:    DFS
+ * Function:         Depth-First Search
+ * Input Parameters: const Matrix& mat
+ *                   int start
+ *                   int v
+ *                   Matrix& closure
+ * Return Value:     void
+ */
+void DFS(const Matrix& mat, int start, int v, Matrix& closure)
+{
+    closure[start][v] = 1;
+    for (size_t i = 0; i < mat.size(); i++)
+        if (mat[v][i] && !closure[start][i])
+            DFS(mat, start, i, closure);
+}
+
+/*
  * Function Name:    transitiveClosure
  * Function:         Calculate transitive closure
  * Input Parameters: const Matrix matrix
@@ -56,11 +73,10 @@ Matrix transitiveClosure(const Matrix matrix)
 {
     Matrix mat(matrix);
     size_t size = mat.size();
-    for (size_t k = 0; k < size; k++)
-        for (size_t i = 0; i < size; i++)
-            for (size_t j = 0; j < size; j++)
-                mat[i][j] = ((mat[i][j] || (mat[i][k] && mat[k][j])) ? 1 : 0);
-    return mat;
+    Matrix closure(size, std::vector<int>(size, 0));
+    for (size_t i = 0; i < size; i++)
+        DFS(mat, i, i, closure);
+    return closure;
 }
 
 /*
