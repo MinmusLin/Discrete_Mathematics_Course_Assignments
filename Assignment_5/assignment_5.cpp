@@ -3,7 +3,7 @@
  * File Name:     assignment_5.cpp
  * File Function: 最优二元树
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/13
+ * Update Date:   2023/12/22
  ****************************************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -95,7 +95,7 @@ void printCodes(const std::shared_ptr<TreeNode>& node, const std::string& prefix
     if (node) {
         printCodes(node->left, prefix + "0");
         if (!node->left && !node->right)
-            std::cout << std::setw(5) << node->num << ": " << prefix << '\n';
+            std::cout << std::setw(5) << node->num << ": " << prefix << std::endl;
         printCodes(node->right, prefix + "1");
     }
 }

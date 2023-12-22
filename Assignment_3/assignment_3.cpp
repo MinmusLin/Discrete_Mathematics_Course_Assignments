@@ -3,7 +3,7 @@
  * File Name:     assignment_3.cpp
  * File Function: 关系的自反、对称、传递闭包
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/13
+ * Update Date:   2023/12/22
  ****************************************************************/
 
 #include <iostream>
@@ -47,20 +47,24 @@ Matrix symmetricClosure(const Matrix matrix)
 }
 
 /*
- * Function Name:    DFS
- * Function:         Depth-First Search
- * Input Parameters: const Matrix& mat
- *                   int start
- *                   int v
- *                   Matrix& closure
- * Return Value:     void
+ * Function Name:    multiplyMatrices
+ * Function:         Multiply matrices
+ * Input Parameters: const Matrix& a
+ *                   const Matrix& b
+ * Return Value:     result
  */
-void DFS(const Matrix& mat, int start, int v, Matrix& closure)
+Matrix multiplyMatrices(const Matrix& a, const Matrix& b)
 {
-    closure[start][v] = 1;
-    for (size_t i = 0; i < mat.size(); i++)
-        if (mat[v][i] && !closure[start][i])
-            DFS(mat, start, i, closure);
+    size_t n = a.size();
+    Matrix result(n, std::vector<int>(n, 0));
+    for (size_t i = 0; i < n; i++) {
+        for (size_t j = 0; j < n; j++) {
+            for (size_t k = 0; k < n; k++) {
+                result[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+    return result;
 }
 
 /*
@@ -72,11 +76,16 @@ void DFS(const Matrix& mat, int start, int v, Matrix& closure)
 Matrix transitiveClosure(const Matrix matrix)
 {
     Matrix mat(matrix);
-    size_t size = mat.size();
-    Matrix closure(size, std::vector<int>(size, 0));
-    for (size_t i = 0; i < size; i++)
-        DFS(mat, i, i, closure);
-    return closure;
+    size_t n = matrix.size();
+    for (size_t m = 2; m <= n; m++) {
+        Matrix matPower = multiplyMatrices(mat, matrix);
+        for (size_t i = 0; i < n; i++) {
+            for (size_t j = 0; j < n; j++) {
+                mat[i][j] = static_cast<int>(matPower[i][j] > 0);
+            }
+        }
+    }
+    return mat;
 }
 
 /*

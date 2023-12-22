@@ -3,7 +3,7 @@
  * File Name:     assignment_1_2.cpp
  * File Function: 真值表、主范式
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/13
+ * Update Date:   2023/12/21
  ****************************************************************/
 
 #include <iostream>
@@ -377,7 +377,7 @@ bool isValidExpression(const std::string& expression)
     std::stack<char> parentheses;
     char previous = '\0';
     for (char ch : expression) {
-        if (!isalpha(ch) && !isOperator(ch) && ch != '(' && ch != ')') {
+        if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) && !isOperator(ch) && ch != '(' && ch != ')') {
             std::cout << ">>> 命题公式存在非法字符输入，请重新输入！" << std::endl;
             return false;
         }

@@ -3,7 +3,7 @@
  * File Name:     assignment_4.cpp
  * File Function: 最小生成树
  * Author:        Jishen Lin (林继申)
- * Update Date:   2023/12/13
+ * Update Date:   2023/12/22
  ****************************************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -30,6 +30,7 @@ struct Edge {
 class MinimumSpanningTree {
 private:
     int vertex;
+    int total;
     int** graph;
     std::vector<Edge> edges;
     std::vector<int> parent;
@@ -39,6 +40,7 @@ private:
 public:
     MinimumSpanningTree(int V);
     ~MinimumSpanningTree();
+    int getTotal(void) const;
     void kruskalMST(void);
     void setWeight(int src, int dst, int weight);
 };
@@ -85,6 +87,7 @@ void MinimumSpanningTree::unionSets(int x, int y)
 MinimumSpanningTree::MinimumSpanningTree(int V)
 {
     vertex = V;
+    total = 0;
     graph = new(std::nothrow) int* [vertex];
     if (graph == NULL) {
         std::cerr << "Error: Memory allocation failed." << std::endl;
@@ -112,6 +115,17 @@ MinimumSpanningTree::~MinimumSpanningTree()
     for (int i = 0; i < vertex; i++)
         delete[] graph[i];
     delete[] graph;
+}
+
+/*
+ * Function Name:    getTotal
+ * Function:         Get the total distance
+ * Input Parameters: void
+ * Return Value:     total distance
+ */
+int MinimumSpanningTree::getTotal(void) const
+{
+    return total;
 }
 
 /*
@@ -148,8 +162,10 @@ void MinimumSpanningTree::kruskalMST(void)
     }
 
     /* Print the edges in the MST */
-    for (const auto& edge : result)
-        std::cout << static_cast<char>(edge.src + 'A') << " --(" << edge.weight << ")--> " << static_cast<char>(edge.dst + 'A') << std::endl;
+    for (const auto& edge : result) {
+        std::cout << static_cast<char>(edge.src + 'A') << " --(" << edge.weight << ")-- " << static_cast<char>(edge.dst + 'A') << std::endl;
+        total += edge.weight;
+    }
 }
 
 /*
@@ -251,7 +267,7 @@ int main()
         /* Generate minimum spanning tree using Kruskal algorithm */
         std::cout << std::endl << ">>> 建立 Kruskal 最小生成树:" << std::endl << std::endl;
         MST.kruskalMST();
-        std::cout << std::endl;
+        std::cout << std::endl << ">>> Kruskal 最小生成树的总权重为 " << MST.getTotal() << std::endl << std::endl;
 
         /* Whether to exit the program */
         std::cout << "是否退出程序 [y/n]: ";
