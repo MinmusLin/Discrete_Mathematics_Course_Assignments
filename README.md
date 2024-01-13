@@ -9,7 +9,7 @@ Discrete_Mathematics_Course_Assignments
 A collection of my discrete mathematics course assignments.
 
 > Relevant course
-> * Discrete Mathematics (同济大学离散数学)
+> * Discrete Mathematics 2023 (2023年同济大学离散数学)
 
 ## 解决方案项目组成
 
@@ -40,4 +40,4 @@ Warshall算法求解传递闭包
 
 ## 文档更新日期
 
-2023年12月22日
+2024年1月13日
