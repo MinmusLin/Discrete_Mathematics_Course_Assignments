@@ -1,17 +1,17 @@
 # Discrete Mathematics Course Assignments
 
-## 解决方案名称
+## 仓库名称
 
 Discrete_Mathematics_Course_Assignments
 
-## 解决方案简介
+## 仓库简介
 
 A collection of my discrete mathematics course assignments.
 
 > Relevant course
 > * Discrete Mathematics 2023 (2023年同济大学离散数学)
 
-## 解决方案项目组成
+## 仓库组成
 
 * [Assignment 1-1](Assignment_1_1)
 命题逻辑联接词
@@ -34,10 +34,6 @@ A collection of my discrete mathematics course assignments.
 * [Assignment 6](Assignment_6)
 Warshall算法求解传递闭包
 
-## 集成开发环境
-
-* Microsoft Visual Studio 2022
-
 ## 文档更新日期
 
-2024年1月13日
+2024年2月13日
