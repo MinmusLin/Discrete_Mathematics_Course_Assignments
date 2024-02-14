@@ -1,0 +1,5 @@
+project(Assignment_1)
+set(PROJECT_1_NAME Assignment_1_1)
+add_executable(${PROJECT_1_NAME} assignment_1_1.cpp)
+set(PROJECT_2_NAME Assignment_1_2)
+add_executable(${PROJECT_2_NAME} assignment_1_2.cpp)
