@@ -1,8 +1,8 @@
 /****************************************************************
  * Project Name:  Assignment_5
  * File Name:     assignment_5.cpp
- * File Function: ×îÓÅ¶şÔªÊ÷
- * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * File Function: æœ€ä¼˜äºŒå…ƒæ ‘
+ * Author:        Jishen Lin (æ—ç»§ç”³)
  * Update Date:   2023/12/22
  ****************************************************************/
 
@@ -111,7 +111,7 @@ void printCodes(const std::shared_ptr<TreeNode>& node, const std::string& prefix
 int inputInteger(int lowerLimit, int upperLimit, const char* prompt)
 {
     while (true) {
-        std::cout << "ÇëÊäÈë" << prompt << " [ÕûÊı·¶Î§: " << lowerLimit << "~" << upperLimit << "]: ";
+        std::cout << "è¯·è¾“å…¥" << prompt << " [æ•´æ•°èŒƒå›´: " << lowerLimit << "~" << upperLimit << "]: ";
         double tempInput;
         std::cin >> tempInput;
         if (std::cin.good() && tempInput == static_cast<int>(tempInput) && tempInput >= lowerLimit && tempInput <= upperLimit) {
@@ -120,7 +120,7 @@ int inputInteger(int lowerLimit, int upperLimit, const char* prompt)
             return static_cast<int>(tempInput);
         }
         else {
-            std::cerr << std::endl << ">>> " << prompt << "ÊäÈë²»ºÏ·¨£¬ÇëÖØĞÂÊäÈë" << prompt << "£¡" << std::endl << std::endl;
+            std::cerr << std::endl << ">>> " << prompt << "è¾“å…¥ä¸åˆæ³•ï¼Œè¯·é‡æ–°è¾“å…¥" << prompt << "ï¼" << std::endl << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
@@ -158,17 +158,17 @@ int main()
         /* System entry prompt */
         system("cls");
         std::cout << "+-----------------------+" << std::endl;
-        std::cout << "|      ×îÓÅ¶şÔªÊ÷       |" << std::endl;
+        std::cout << "|      æœ€ä¼˜äºŒå…ƒæ ‘       |" << std::endl;
         std::cout << "|  Optimal Binary Tree  |" << std::endl;
         std::cout << "+-----------------------+" << std::endl << std::endl;
 
         /* Establish optimal binary tree */
-        int num = inputInteger(2, INT_MAX, "×îÓÅ¶şÔªÊ÷½Úµã¸öÊı");
-        std::cout << std::endl << ">>> ÇëÊäÈë×îÓÅ¶şÔªÊ÷½Úµã" << std::endl << std::endl;
+        int num = inputInteger(2, INT_MAX, "æœ€ä¼˜äºŒå…ƒæ ‘èŠ‚ç‚¹ä¸ªæ•°");
+        std::cout << std::endl << ">>> è¯·è¾“å…¥æœ€ä¼˜äºŒå…ƒæ ‘èŠ‚ç‚¹" << std::endl << std::endl;
         std::vector<int> frequencies(num);
         for (int i = 0; i < num; i++) {
             char tmp[64];
-            sprintf(tmp, "×îÓÅ¶şÔªÊ÷µÄµÚ %d ¸ö½Úµã", i + 1);
+            sprintf(tmp, "æœ€ä¼˜äºŒå…ƒæ ‘çš„ç¬¬ %d ä¸ªèŠ‚ç‚¹", i + 1);
             frequencies[i] = inputInteger(0, SHRT_MAX, tmp);
         }
         std::vector<std::shared_ptr<TreeNode>> nodes;
@@ -176,11 +176,11 @@ int main()
         auto root = constructTree(nodes);
 
         /* Print the binary prefix codes */
-        std::cout << std::endl << ">>> ×îÓÅ¶şÔªÊ÷±àÂë" << std::endl << std::endl;
+        std::cout << std::endl << ">>> æœ€ä¼˜äºŒå…ƒæ ‘ç¼–ç " << std::endl << std::endl;
         printCodes(root, "");
 
         /* Whether to exit the program */
-        std::cout << std::endl << "ÊÇ·ñÍË³ö³ÌĞò [y/n]: ";
+        std::cout << std::endl << "æ˜¯å¦é€€å‡ºç¨‹åº [y/n]: ";
     } while (!inputLogicalValue('n', 'y'));
     return 0;
 }

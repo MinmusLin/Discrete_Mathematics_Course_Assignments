@@ -1,8 +1,8 @@
 /****************************************************************
  * Project Name:  Assignment_1_1
  * File Name:     assignment_1_1.cpp
- * File Function: ÃüÌâÂß¼­Áª½Ó´Ê
- * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * File Function: å‘½é¢˜é€»è¾‘è”æ¥è¯
+ * Author:        Jishen Lin (æ—ç»§ç”³)
  * Update Date:   2023/12/13
  ****************************************************************/
 
@@ -40,24 +40,24 @@ int main()
         /* System entry prompt */
         system("cls");
         std::cout << "+-----------------------------------+" << std::endl;
-        std::cout << "|          ÃüÌâÂß¼­Áª½Ó´Ê           |" << std::endl;
+        std::cout << "|          å‘½é¢˜é€»è¾‘è”æ¥è¯           |" << std::endl;
         std::cout << "|  Propositional Logic Connectives  |" << std::endl;
         std::cout << "+-----------------------------------+" << std::endl << std::endl;
 
         /* Enter the value of P and Q */
-        std::cout << "ÇëÊäÈë P µÄÖµ [0/1]: ";
+        std::cout << "è¯·è¾“å…¥ P çš„å€¼ [0/1]: ";
         bool p = inputLogicalValue();
-        std::cout << "ÇëÊäÈë Q µÄÖµ [0/1]: ";
+        std::cout << "è¯·è¾“å…¥ Q çš„å€¼ [0/1]: ";
         bool q = inputLogicalValue();
 
         /* Propositional logic connectives */
-        std::cout << ">>> ºÏÈ¡: P¡ÄQ = " << (p && q) << std::endl << std::endl; // Conjunction
-        std::cout << ">>> ÎöÈ¡: P¡ÅQ = " << (p || q) << std::endl << std::endl; // Disjunction
-        std::cout << ">>> Ìõ¼ş: P¡úQ = " << (!p || q) << std::endl << std::endl; // Implication
-        std::cout << ">>> Ë«ÏòÌõ¼ş: P¡û¡úQ = " << ((!p || q) && (!q || p)) << std::endl << std::endl; // Equivalence
+        std::cout << ">>> åˆå–: Pâˆ§Q = " << (p && q) << std::endl << std::endl; // Conjunction
+        std::cout << ">>> æå–: Pâˆ¨Q = " << (p || q) << std::endl << std::endl; // Disjunction
+        std::cout << ">>> æ¡ä»¶: Pâ†’Q = " << (!p || q) << std::endl << std::endl; // Implication
+        std::cout << ">>> åŒå‘æ¡ä»¶: Pâ†â†’Q = " << ((!p || q) && (!q || p)) << std::endl << std::endl; // Equivalence
 
         /* Whether to exit the program */
-        std::cout << "ÊÇ·ñÍË³ö³ÌĞò [y/n]: ";
+        std::cout << "æ˜¯å¦é€€å‡ºç¨‹åº [y/n]: ";
     } while (!inputLogicalValue('n', 'y'));
     return 0;
 }

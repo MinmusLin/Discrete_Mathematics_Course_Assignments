@@ -1,8 +1,8 @@
 /****************************************************************
  * Project Name:  Assignment_6
  * File Name:     assignment_6.cpp
- * File Function: WarshallËã·¨Çó½â´«µÝ±Õ°ü
- * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * File Function: Warshallç®—æ³•æ±‚è§£ä¼ é€’é—­åŒ…
+ * Author:        Jishen Lin (æž—ç»§ç”³)
  * Update Date:   2023/12/13
  ****************************************************************/
 
@@ -96,7 +96,7 @@ bool inputLogicalValue(char falseValue = '0', char trueValue = '1')
 int inputInteger(int lowerLimit, int upperLimit, const char* prompt)
 {
     while (true) {
-        std::cout << "ÇëÊäÈë" << prompt << " [ÕûÊý·¶Î§: " << lowerLimit << "~" << upperLimit << "]: ";
+        std::cout << "è¯·è¾“å…¥" << prompt << " [æ•´æ•°èŒƒå›´: " << lowerLimit << "~" << upperLimit << "]: ";
         double tempInput;
         std::cin >> tempInput;
         if (std::cin.good() && tempInput == static_cast<int>(tempInput) && tempInput >= lowerLimit && tempInput <= upperLimit) {
@@ -105,7 +105,7 @@ int inputInteger(int lowerLimit, int upperLimit, const char* prompt)
             return static_cast<int>(tempInput);
         }
         else {
-            std::cerr << std::endl << ">>> " << prompt << "ÊäÈë²»ºÏ·¨£¬ÇëÖØÐÂÊäÈë" << prompt << "£¡" << std::endl << std::endl;
+            std::cerr << std::endl << ">>> " << prompt << "è¾“å…¥ä¸åˆæ³•ï¼Œè¯·é‡æ–°è¾“å…¥" << prompt << "ï¼" << std::endl << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
@@ -123,14 +123,14 @@ int main()
         /* System entry prompt */
         system("cls");
         std::cout << "+------------------------------------------------------+" << std::endl;
-        std::cout << "|               WarshallËã·¨Çó½â´«µÝ±Õ°ü               |" << std::endl;
+        std::cout << "|               Warshallç®—æ³•æ±‚è§£ä¼ é€’é—­åŒ…               |" << std::endl;
         std::cout << "|  Use Warshall Algorithm to Solve Transitive Closure  |" << std::endl;
         std::cout << "+------------------------------------------------------+" << std::endl << std::endl;
 
         /* Input matrix */
-        int size = inputInteger(2, 26, "¹ØÏµ¾ØÕó´óÐ¡");
+        int size = inputInteger(2, 26, "å…³ç³»çŸ©é˜µå¤§å°");
         Matrix matrix(size, std::vector<int>(size));
-        std::cout << std::endl << ">>> ÇëÊäÈë¹ØÏµ¾ØÕó [0/1]" << std::endl << std::endl;
+        std::cout << std::endl << ">>> è¯·è¾“å…¥å…³ç³»çŸ©é˜µ [0/1]" << std::endl << std::endl;
         for (int i = 0; i < size; i++) {
             std::cout << (i == 0 ? "Matrix = [" : "         ");
             for (int j = 0; j < size; j++) {
@@ -144,10 +144,10 @@ int main()
 
         /* Transitive closure */
         Matrix transitive = transitiveClosure(matrix);
-        std::cout << std::endl << ">>> ´«µÝ±Õ°ü" << std::endl << std::endl << transitive << std::endl;
+        std::cout << std::endl << ">>> ä¼ é€’é—­åŒ…" << std::endl << std::endl << transitive << std::endl;
 
         /* Whether to exit the program */
-        std::cout << "ÊÇ·ñÍË³ö³ÌÐò [y/n]: ";
+        std::cout << "æ˜¯å¦é€€å‡ºç¨‹åº [y/n]: ";
     } while (!inputLogicalValue('n', 'y'));
     return 0;
 }

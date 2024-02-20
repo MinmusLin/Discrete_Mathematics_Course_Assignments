@@ -1,8 +1,8 @@
 /****************************************************************
  * Project Name:  Assignment_1_2
  * File Name:     assignment_1_2.cpp
- * File Function: ÕæÖµ±í¡¢Ö÷·¶Ê½
- * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * File Function: çœŸå€¼è¡¨ã€ä¸»èŒƒå¼
+ * Author:        Jishen Lin (æ—ç»§ç”³)
  * Update Date:   2023/12/21
  ****************************************************************/
 
@@ -219,10 +219,10 @@ void outputTruthTableAndNormalForms(const std::string& expression)
     /* Extract unique variables from the expression */
     auto variables = extractVariables(expression);
     int numVariables = static_cast<int>(variables.size());
-    std::cout << std::endl << ">>> ±äÁ¿¸öÊı: " << numVariables << std::endl;
+    std::cout << std::endl << ">>> å˜é‡ä¸ªæ•°: " << numVariables << std::endl;
 
     /* Start printing the truth table */
-    std::cout << std::endl << ">>> ÕæÖµ±í" << std::endl << std::endl;
+    std::cout << std::endl << ">>> çœŸå€¼è¡¨" << std::endl << std::endl;
     printSeparator(numVariables);
 
     /* Print the header row of the truth table */
@@ -253,7 +253,7 @@ void outputTruthTableAndNormalForms(const std::string& expression)
 
     /* Print the main conjunctive normal form (CNF) */
     bool first = true;
-    std::cout << std::endl << ">>> Ö÷ºÏÈ¡·¶Ê½: ";
+    std::cout << std::endl << ">>> ä¸»åˆå–èŒƒå¼: ";
     bool isAlwaysTrue = std::find(results.begin(), results.end(), 0) == results.end(); // Check if the expression is always true
     if (isAlwaysTrue)
         std::cout << "1";
@@ -266,15 +266,15 @@ void outputTruthTableAndNormalForms(const std::string& expression)
                     first = false;
                 }
                 else
-                    std::cout << "¡ÄM<" << i << ">";
+                    std::cout << "âˆ§M<" << i << ">";
             }
     }
 
     /* Print false sssignments */
     first = true;
-    std::cout << std::endl << std::endl << ">>> ³É¼Ù¸³Öµ: ";
+    std::cout << std::endl << std::endl << ">>> æˆå‡èµ‹å€¼: ";
     if (isAlwaysTrue)
-        std::cout << "ÎŞ";
+        std::cout << "æ— ";
     else {
         for (int i = 0; i < std::pow(2, numVariables); i++)
             if (results[i] == 0) {
@@ -283,7 +283,7 @@ void outputTruthTableAndNormalForms(const std::string& expression)
                     first = false;
                 }
                 else {
-                    std::cout << "¡¢";
+                    std::cout << "ã€";
                     printBinary(i, numVariables);
                 }
             }
@@ -291,7 +291,7 @@ void outputTruthTableAndNormalForms(const std::string& expression)
 
     /* Print the main disjunctive normal form (DNF) */
     first = true;
-    std::cout << std::endl << std::endl << ">>> Ö÷ÎöÈ¡·¶Ê½: ";
+    std::cout << std::endl << std::endl << ">>> ä¸»æå–èŒƒå¼: ";
     bool isAlwaysFalse = std::find(results.begin(), results.end(), 1) == results.end(); // Check if the expression is always false
     if (isAlwaysFalse)
         std::cout << "0";
@@ -304,15 +304,15 @@ void outputTruthTableAndNormalForms(const std::string& expression)
                     first = false;
                 }
                 else
-                    std::cout << "¡Åm<" << i << ">";
+                    std::cout << "âˆ¨m<" << i << ">";
             }
     }
 
     /* Print true sssignments */
     first = true;
-    std::cout << std::endl << std::endl << ">>> ³ÉÕæ¸³Öµ: ";
+    std::cout << std::endl << std::endl << ">>> æˆçœŸèµ‹å€¼: ";
     if (isAlwaysFalse)
-        std::cout << "ÎŞ";
+        std::cout << "æ— ";
     else {
         for (int i = 0; i < std::pow(2, numVariables); i++)
             if (results[i] == 1) {
@@ -321,7 +321,7 @@ void outputTruthTableAndNormalForms(const std::string& expression)
                     first = false;
                 }
                 else {
-                    std::cout << "¡¢";
+                    std::cout << "ã€";
                     printBinary(i, numVariables);
                 }
             }
@@ -355,10 +355,10 @@ std::string replaceAll(std::string str, const std::string& from, const std::stri
  */
 std::string replaceSymbols(std::string input)
 {
-    input = replaceAll(input, "&", "¡Ä"); // Replace "&" with "¡Ä"
-    input = replaceAll(input, "|", "¡Å"); // Replace "|" with "¡Å"
-    input = replaceAll(input, "~", "¡û¡ú"); // Replace "~" with "¡û¡ú"
-    input = replaceAll(input, "^", "¡ú"); // Replace "^" with "¡ú"
+    input = replaceAll(input, "&", "âˆ§"); // Replace "&" with "âˆ§"
+    input = replaceAll(input, "|", "âˆ¨"); // Replace "|" with "âˆ¨"
+    input = replaceAll(input, "~", "â†â†’"); // Replace "~" with "â†â†’"
+    input = replaceAll(input, "^", "â†’"); // Replace "^" with "â†’"
     return input;
 }
 
@@ -371,61 +371,61 @@ std::string replaceSymbols(std::string input)
 bool isValidExpression(const std::string& expression)
 {
     if (expression.empty()) {
-        std::cout << ">>> ÃüÌâ¹«Ê½Îª¿Õ£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+        std::cout << ">>> å‘½é¢˜å…¬å¼ä¸ºç©ºï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
         return false;
     }
     std::stack<char> parentheses;
     char previous = '\0';
     for (char ch : expression) {
         if (!((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) && !isOperator(ch) && ch != '(' && ch != ')') {
-            std::cout << ">>> ÃüÌâ¹«Ê½´æÔÚ·Ç·¨×Ö·ûÊäÈë£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+            std::cout << ">>> å‘½é¢˜å…¬å¼å­˜åœ¨éæ³•å­—ç¬¦è¾“å…¥ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
             return false;
         }
         if (previous == '\0' && (ch == '&' || ch == '|' || ch == '~' || ch == '^')) {
-            std::cout << ">>> ÃüÌâ¹«Ê½²»ÄÜÒÔ¶şÔªÔËËã·û¿ªÊ¼£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+            std::cout << ">>> å‘½é¢˜å…¬å¼ä¸èƒ½ä»¥äºŒå…ƒè¿ç®—ç¬¦å¼€å§‹ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
             return false;
         }
         if (previous == '(' && ch == ')') {
-            std::cout << ">>> ÃüÌâ¹«Ê½´æÔÚ¿ÕÀ¨ºÅ£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+            std::cout << ">>> å‘½é¢˜å…¬å¼å­˜åœ¨ç©ºæ‹¬å·ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
             return false;
         }
         if (previous == '!' && ch == '!') {
-            std::cout << ">>> ÃüÌâ¹«Ê½´æÔÚ²»ºÏ·¨µÄÁ¬ĞøÈ¡·Ç²Ù×÷£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+            std::cout << ">>> å‘½é¢˜å…¬å¼å­˜åœ¨ä¸åˆæ³•çš„è¿ç»­å–éæ“ä½œï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
             return false;
         }
         if (ch == '!' && isalpha(previous)) {
-            std::cout << ">>> ÃüÌâ¹«Ê½ÖĞÈ¡·ÇÔËËã·ûÇ°²»¿ÉÁ¬½Ó±äÁ¿£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+            std::cout << ">>> å‘½é¢˜å…¬å¼ä¸­å–éè¿ç®—ç¬¦å‰ä¸å¯è¿æ¥å˜é‡ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
             return false;
         }
         if ((isalpha(ch) && previous == ')') || (ch == '(' && isalpha(previous))) {
-            std::cout << ">>> ÃüÌâ¹«Ê½ÖĞ±äÁ¿ÓëÀ¨ºÅµÄÁ¬½Ó²»ÕıÈ·£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+            std::cout << ">>> å‘½é¢˜å…¬å¼ä¸­å˜é‡ä¸æ‹¬å·çš„è¿æ¥ä¸æ­£ç¡®ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
             return false;
         }
         if (ch == '(')
             parentheses.push(ch);
         else if (ch == ')') {
             if (parentheses.empty()) {
-                std::cout << ">>> ÃüÌâ¹«Ê½À¨ºÅ²»Æ¥Åä£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+                std::cout << ">>> å‘½é¢˜å…¬å¼æ‹¬å·ä¸åŒ¹é…ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
                 return false;
             }
             parentheses.pop();
         }
         if (isalpha(ch) && isalpha(previous)) {
-            std::cout << ">>> ÃüÌâ¹«Ê½½öÊÊÓÃÓÚµ¥×Ö·û±äÁ¿£¬²»ÊÊÓÃÓÚ¶à×Ö·û±äÁ¿£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+            std::cout << ">>> å‘½é¢˜å…¬å¼ä»…é€‚ç”¨äºå•å­—ç¬¦å˜é‡ï¼Œä¸é€‚ç”¨äºå¤šå­—ç¬¦å˜é‡ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
             return false;
         }
         if ((ch == '&' || ch == '|' || ch == '~' || ch == '^') && (!isalpha(previous) && previous != ')')) {
-            std::cout << ">>> ÃüÌâ¹«Ê½ÖĞÃ¿¸ö¶şÔªÔËËã·ûÇ°ºó±ØĞëÁ¬½Ó±äÁ¿£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+            std::cout << ">>> å‘½é¢˜å…¬å¼ä¸­æ¯ä¸ªäºŒå…ƒè¿ç®—ç¬¦å‰åå¿…é¡»è¿æ¥å˜é‡ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
             return false;
         }
         previous = ch;
     }
     if (previous == '&' || previous == '|' || previous == '~' || previous == '^' || previous == '!') {
-        std::cout << ">>> ÃüÌâ¹«Ê½²»ÄÜÒÔÔËËã·û½áÎ²£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+        std::cout << ">>> å‘½é¢˜å…¬å¼ä¸èƒ½ä»¥è¿ç®—ç¬¦ç»“å°¾ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
         return false;
     }
     if (!parentheses.empty()) {
-        std::cout << ">>> ÃüÌâ¹«Ê½À¨ºÅ²»Æ¥Åä£¬ÇëÖØĞÂÊäÈë£¡" << std::endl;
+        std::cout << ">>> å‘½é¢˜å…¬å¼æ‹¬å·ä¸åŒ¹é…ï¼Œè¯·é‡æ–°è¾“å…¥ï¼" << std::endl;
         return false;
     }
     return true;
@@ -462,34 +462,34 @@ int main()
         /* System entry prompt */
         system("cls");
         std::cout << "+-----------------------------------+" << std::endl;
-        std::cout << "|          ÕæÖµ±í¡¢Ö÷·¶Ê½           |" << std::endl;
+        std::cout << "|          çœŸå€¼è¡¨ã€ä¸»èŒƒå¼           |" << std::endl;
         std::cout << "|  Truth Table and Prime Implicant  |" << std::endl;
         std::cout << "+-----------------------------------+" << std::endl << std::endl;
-        std::cout << ">>> ÃüÌâ¹«Ê½ÊäÈëÒªÇó" << std::endl;
-        std::cout << "    [1] ×Ö·û '!' ±íÊ¾·Ç£¨Negation£©" << std::endl;
-        std::cout << "    [2] ×Ö·û '&' ±íÊ¾Óë£¨Conjunction£©" << std::endl;
-        std::cout << "    [3] ×Ö·û '|' ±íÊ¾»ò£¨Disjunction£©" << std::endl;
-        std::cout << "    [4] ×Ö·û '^' ±íÊ¾ÔÌº¬£¨Implication£©" << std::endl;
-        std::cout << "    [5] ×Ö·û '~' ±íÊ¾µÈÖµ£¨Equivalence£©" << std::endl;
-        std::cout << "    [6] ÃüÌâ¹«Ê½ÖĞÖ»´æÔÚÒÔÏÂ 59 ÖÖ×Ö·û: a-z A-Z ! & | ^ ~ ( )" << std::endl;
-        std::cout << "    [7] ÃüÌâ¹«Ê½ÖĞµÄÀ¨ºÅÇ¶Ì×Æ¥Åä" << std::endl;
-        std::cout << "    [8] ÃüÌâ¹«Ê½½öÊÊÓÃÓÚµ¥×Ö·û±äÁ¿£¬²»ÊÊÓÃÓÚ¶à×Ö·û±äÁ¿" << std::endl;
-        std::cout << "    [9] ÃüÌâ¹«Ê½ÖĞÃ¿¸öÔËËã·ûÇ°ºó±ØĞëÁ¬½Ó±äÁ¿£¨\"!!a\"ÇëÊäÈëÎª\"!(!a)\"£©" << std::endl;
+        std::cout << ">>> å‘½é¢˜å…¬å¼è¾“å…¥è¦æ±‚" << std::endl;
+        std::cout << "    [1] å­—ç¬¦ '!' è¡¨ç¤ºéï¼ˆNegationï¼‰" << std::endl;
+        std::cout << "    [2] å­—ç¬¦ '&' è¡¨ç¤ºä¸ï¼ˆConjunctionï¼‰" << std::endl;
+        std::cout << "    [3] å­—ç¬¦ '|' è¡¨ç¤ºæˆ–ï¼ˆDisjunctionï¼‰" << std::endl;
+        std::cout << "    [4] å­—ç¬¦ '^' è¡¨ç¤ºè•´å«ï¼ˆImplicationï¼‰" << std::endl;
+        std::cout << "    [5] å­—ç¬¦ '~' è¡¨ç¤ºç­‰å€¼ï¼ˆEquivalenceï¼‰" << std::endl;
+        std::cout << "    [6] å‘½é¢˜å…¬å¼ä¸­åªå­˜åœ¨ä»¥ä¸‹ 59 ç§å­—ç¬¦: a-z A-Z ! & | ^ ~ ( )" << std::endl;
+        std::cout << "    [7] å‘½é¢˜å…¬å¼ä¸­çš„æ‹¬å·åµŒå¥—åŒ¹é…" << std::endl;
+        std::cout << "    [8] å‘½é¢˜å…¬å¼ä»…é€‚ç”¨äºå•å­—ç¬¦å˜é‡ï¼Œä¸é€‚ç”¨äºå¤šå­—ç¬¦å˜é‡" << std::endl;
+        std::cout << "    [9] å‘½é¢˜å…¬å¼ä¸­æ¯ä¸ªè¿ç®—ç¬¦å‰åå¿…é¡»è¿æ¥å˜é‡ï¼ˆ\"!!a\"è¯·è¾“å…¥ä¸º\"!(!a)\"ï¼‰" << std::endl;
 
         /* Input a a propositional formula */
         std::string expression;
         do {
-            std::cout << std::endl << "ÇëÊäÈëÃüÌâ¹«Ê½: ";
+            std::cout << std::endl << "è¯·è¾“å…¥å‘½é¢˜å…¬å¼: ";
             std::cin >> expression;
             std::cout << std::endl;
         } while (!isValidExpression(expression));
-        std::cout << ">>> ÃüÌâ¹«Ê½: " << replaceSymbols(expression) << std::endl;
+        std::cout << ">>> å‘½é¢˜å…¬å¼: " << replaceSymbols(expression) << std::endl;
 
         /* Output truth table and normal forms (CNF and DNF) */
         outputTruthTableAndNormalForms(expression);
 
         /* Whether to exit the program */
-        std::cout << "ÊÇ·ñÍË³ö³ÌĞò [y/n]: ";
+        std::cout << "æ˜¯å¦é€€å‡ºç¨‹åº [y/n]: ";
     } while (!inputLogicalValue('n', 'y'));
     return 0;
 }

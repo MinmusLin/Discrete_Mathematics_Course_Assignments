@@ -1,8 +1,8 @@
 /****************************************************************
  * Project Name:  Assignment_2
  * File Name:     assignment_2.cpp
- * File Function: ÃüÌâÂß¼­ÍÆÀí
- * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * File Function: å‘½é¢˜é€»è¾‘æ¨ç†
+ * Author:        Jishen Lin (æ—ç»§ç”³)
  * Update Date:   2023/12/13
  ****************************************************************/
 
@@ -19,23 +19,23 @@ int main()
 {
     /* System entry prompt */
     std::cout << "+---------------------------------+" << std::endl;
-    std::cout << "|          ÃüÌâÂß¼­ÍÆÀí           |" << std::endl;
+    std::cout << "|          å‘½é¢˜é€»è¾‘æ¨ç†           |" << std::endl;
     std::cout << "|  Propositional Logic Reasoning  |" << std::endl;
     std::cout << "+---------------------------------+" << std::endl << std::endl;
 
     /* Problem description */
-    std::cout << ">>> ÎÊÌâÃèÊö" << std::endl;
-    std::cout << "    [ÃüÌâ 1] ÓªÒµÔ± A »ò B ÍµÁËÊÖ±í" << std::endl;
-    std::cout << "    [ÃüÌâ 2] Èô A ×÷°¸£¬Ôò×÷°¸²»ÔÚÓªÒµÊ±¼ä" << std::endl;
-    std::cout << "    [ÃüÌâ 3] Èô B Ìá¹©µÄÖ¤¾İÕıÈ·£¬Ôò»õ¹ñÎ´ÉÏËø" << std::endl;
-    std::cout << "    [ÃüÌâ 4] Èô B Ìá¹©µÄÖ¤¾İ²»ÕıÈ·£¬Ôò×÷°¸·¢ÉúÔÚÓªÒµÊ±¼ä" << std::endl;
-    std::cout << "    [ÃüÌâ 5] »õ¹ñÉÏÁËËø" << std::endl << std::endl;
-    std::cout << ">>> ÃüÌâ±äÔª±íÊ¾" << std::endl;
-    std::cout << "    [ÃüÌâ A] ÓªÒµÔ± A ÍµÁËÊÖ±í" << std::endl;
-    std::cout << "    [ÃüÌâ B] ÓªÒµÔ± B ÍµÁËÊÖ±í" << std::endl;
-    std::cout << "    [ÃüÌâ C] ×÷°¸²»ÔÚÓªÒµÊ±¼ä" << std::endl;
-    std::cout << "    [ÃüÌâ D] B Ìá¹©µÄÖ¤¾İÕıÈ·" << std::endl;
-    std::cout << "    [ÃüÌâ E] »õ¹ñÎ´ÉÏËø" << std::endl << std::endl;
+    std::cout << ">>> é—®é¢˜æè¿°" << std::endl;
+    std::cout << "    [å‘½é¢˜ 1] è¥ä¸šå‘˜ A æˆ– B å·äº†æ‰‹è¡¨" << std::endl;
+    std::cout << "    [å‘½é¢˜ 2] è‹¥ A ä½œæ¡ˆï¼Œåˆ™ä½œæ¡ˆä¸åœ¨è¥ä¸šæ—¶é—´" << std::endl;
+    std::cout << "    [å‘½é¢˜ 3] è‹¥ B æä¾›çš„è¯æ®æ­£ç¡®ï¼Œåˆ™è´§æŸœæœªä¸Šé”" << std::endl;
+    std::cout << "    [å‘½é¢˜ 4] è‹¥ B æä¾›çš„è¯æ®ä¸æ­£ç¡®ï¼Œåˆ™ä½œæ¡ˆå‘ç”Ÿåœ¨è¥ä¸šæ—¶é—´" << std::endl;
+    std::cout << "    [å‘½é¢˜ 5] è´§æŸœä¸Šäº†é”" << std::endl << std::endl;
+    std::cout << ">>> å‘½é¢˜å˜å…ƒè¡¨ç¤º" << std::endl;
+    std::cout << "    [å‘½é¢˜ A] è¥ä¸šå‘˜ A å·äº†æ‰‹è¡¨" << std::endl;
+    std::cout << "    [å‘½é¢˜ B] è¥ä¸šå‘˜ B å·äº†æ‰‹è¡¨" << std::endl;
+    std::cout << "    [å‘½é¢˜ C] ä½œæ¡ˆä¸åœ¨è¥ä¸šæ—¶é—´" << std::endl;
+    std::cout << "    [å‘½é¢˜ D] B æä¾›çš„è¯æ®æ­£ç¡®" << std::endl;
+    std::cout << "    [å‘½é¢˜ E] è´§æŸœæœªä¸Šé”" << std::endl << std::endl;
 
     /* Propositional logic reasoning */
     for (int i = 0; i < pow(2, 5); i++) {
@@ -45,8 +45,8 @@ int main()
         bool D = i & 0b1000;
         bool E = i & 0b10000;
         if ((A || B) && (!A || C) && (!D || E) && (D || !C) && !E) {
-            std::cout << ">>> ÃüÌâÂß¼­ÍÆÀí½á¹û: A = " << (A ? "True" : "False") << ", B = " << (B ? "True" : "False") << std::endl << std::endl;
-            std::cout << ">>> ËùÒÔÓªÒµÔ± " << (A ? "A" : "") << (B ? "B" : "") << " ÍµÁËÊÖ±í" << std::endl;
+            std::cout << ">>> å‘½é¢˜é€»è¾‘æ¨ç†ç»“æœ: A = " << (A ? "True" : "False") << ", B = " << (B ? "True" : "False") << std::endl << std::endl;
+            std::cout << ">>> æ‰€ä»¥è¥ä¸šå‘˜ " << (A ? "A" : "") << (B ? "B" : "") << " å·äº†æ‰‹è¡¨" << std::endl;
         }
     }
 

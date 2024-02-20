@@ -1,8 +1,8 @@
 /****************************************************************
  * Project Name:  Assignment_3
  * File Name:     assignment_3.cpp
- * File Function: ¹ØÏµµÄ×Ô·´¡¢¶Ô³Æ¡¢´«µİ±Õ°ü
- * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * File Function: å…³ç³»çš„è‡ªåã€å¯¹ç§°ã€ä¼ é€’é—­åŒ…
+ * Author:        Jishen Lin (æ—ç»§ç”³)
  * Update Date:   2023/12/22
  ****************************************************************/
 
@@ -153,7 +153,7 @@ bool inputLogicalValue(char falseValue = '0', char trueValue = '1')
 int inputInteger(int lowerLimit, int upperLimit, const char* prompt)
 {
     while (true) {
-        std::cout << "ÇëÊäÈë" << prompt << " [ÕûÊı·¶Î§: " << lowerLimit << "~" << upperLimit << "]: ";
+        std::cout << "è¯·è¾“å…¥" << prompt << " [æ•´æ•°èŒƒå›´: " << lowerLimit << "~" << upperLimit << "]: ";
         double tempInput;
         std::cin >> tempInput;
         if (std::cin.good() && tempInput == static_cast<int>(tempInput) && tempInput >= lowerLimit && tempInput <= upperLimit) {
@@ -162,7 +162,7 @@ int inputInteger(int lowerLimit, int upperLimit, const char* prompt)
             return static_cast<int>(tempInput);
         }
         else {
-            std::cerr << std::endl << ">>> " << prompt << "ÊäÈë²»ºÏ·¨£¬ÇëÖØĞÂÊäÈë" << prompt << "£¡" << std::endl << std::endl;
+            std::cerr << std::endl << ">>> " << prompt << "è¾“å…¥ä¸åˆæ³•ï¼Œè¯·é‡æ–°è¾“å…¥" << prompt << "ï¼" << std::endl << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
@@ -180,14 +180,14 @@ int main()
         /* System entry prompt */
         system("cls");
         std::cout << "+--------------------------------------------------------------+" << std::endl;
-        std::cout << "|                  ¹ØÏµµÄ×Ô·´¡¢¶Ô³Æ¡¢´«µİ±Õ°ü                  |" << std::endl;
+        std::cout << "|                  å…³ç³»çš„è‡ªåã€å¯¹ç§°ã€ä¼ é€’é—­åŒ…                  |" << std::endl;
         std::cout << "|  Reflexive, Symmetric and Transitive Closures of a Relation  |" << std::endl;
         std::cout << "+--------------------------------------------------------------+" << std::endl << std::endl;
 
         /* Input matrix */
-        int size = inputInteger(2, 26, "¹ØÏµ¾ØÕó´óĞ¡");
+        int size = inputInteger(2, 26, "å…³ç³»çŸ©é˜µå¤§å°");
         Matrix matrix(size, std::vector<int>(size));
-        std::cout << std::endl << ">>> ÇëÊäÈë¹ØÏµ¾ØÕó [0/1]" << std::endl << std::endl;
+        std::cout << std::endl << ">>> è¯·è¾“å…¥å…³ç³»çŸ©é˜µ [0/1]" << std::endl << std::endl;
         for (int i = 0; i < size; i++) {
             std::cout << (i == 0 ? "Matrix = [" : "         ");
             for (int j = 0; j < size; j++) {
@@ -201,18 +201,18 @@ int main()
 
         /* Reflexive closure */
         Matrix reflexive = reflexiveClosure(matrix);
-        std::cout << std::endl << ">>> ×Ô·´±Õ°ü" << std::endl << std::endl << reflexive << std::endl;
+        std::cout << std::endl << ">>> è‡ªåé—­åŒ…" << std::endl << std::endl << reflexive << std::endl;
 
         /* Symmetric closure */
         Matrix symmetric = symmetricClosure(matrix);
-        std::cout << ">>> ¶Ô³Æ±Õ°ü" << std::endl << std::endl << symmetric << std::endl;
+        std::cout << ">>> å¯¹ç§°é—­åŒ…" << std::endl << std::endl << symmetric << std::endl;
 
         /* Transitive closure */
         Matrix transitive = transitiveClosure(matrix);
-        std::cout << ">>> ´«µİ±Õ°ü" << std::endl << std::endl << transitive << std::endl;
+        std::cout << ">>> ä¼ é€’é—­åŒ…" << std::endl << std::endl << transitive << std::endl;
 
         /* Whether to exit the program */
-        std::cout << "ÊÇ·ñÍË³ö³ÌĞò [y/n]: ";
+        std::cout << "æ˜¯å¦é€€å‡ºç¨‹åº [y/n]: ";
     } while (!inputLogicalValue('n', 'y'));
     return 0;
 }

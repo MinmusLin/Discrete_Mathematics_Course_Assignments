@@ -1,8 +1,8 @@
 /****************************************************************
  * Project Name:  Assignment_4
  * File Name:     assignment_4.cpp
- * File Function: ×îĞ¡Éú³ÉÊ÷
- * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * File Function: æœ€å°ç”Ÿæˆæ ‘
+ * Author:        Jishen Lin (æ—ç»§ç”³)
  * Update Date:   2023/12/22
  ****************************************************************/
 
@@ -194,7 +194,7 @@ void MinimumSpanningTree::setWeight(int src, int dst, int weight)
 int inputInteger(int lowerLimit, int upperLimit, const char* prompt)
 {
     while (true) {
-        std::cout << "ÇëÊäÈë" << prompt << " [ÕûÊı·¶Î§: " << lowerLimit << "~" << upperLimit << "]: ";
+        std::cout << "è¯·è¾“å…¥" << prompt << " [æ•´æ•°èŒƒå›´: " << lowerLimit << "~" << upperLimit << "]: ";
         double tempInput;
         std::cin >> tempInput;
         if (std::cin.good() && tempInput == static_cast<int>(tempInput) && tempInput >= lowerLimit && tempInput <= upperLimit) {
@@ -203,7 +203,7 @@ int inputInteger(int lowerLimit, int upperLimit, const char* prompt)
             return static_cast<int>(tempInput);
         }
         else {
-            std::cerr << std::endl << ">>> " << prompt << "ÊäÈë²»ºÏ·¨£¬ÇëÖØĞÂÊäÈë" << prompt << "£¡" << std::endl << std::endl;
+            std::cerr << std::endl << ">>> " << prompt << "è¾“å…¥ä¸åˆæ³•ï¼Œè¯·é‡æ–°è¾“å…¥" << prompt << "ï¼" << std::endl << std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         }
@@ -241,36 +241,36 @@ int main()
         /* System entry prompt */
         system("cls");
         std::cout << "+-------------------------+" << std::endl;
-        std::cout << "|       ×îĞ¡Éú³ÉÊ÷        |" << std::endl;
+        std::cout << "|       æœ€å°ç”Ÿæˆæ ‘        |" << std::endl;
         std::cout << "|  Minimum Spanning Tree  |" << std::endl;
         std::cout << "+-------------------------+" << std::endl;
 
         /* Establish road network */
-        std::cout << std::endl << ">>> Çë´´½¨Â·Íø" << std::endl << std::endl;
-        int vertex = inputInteger(2, 'Z' - 'A' + 1, "³ÇÊĞ£¨Â·Íø½Úµã£©¸öÊı");
+        std::cout << std::endl << ">>> è¯·åˆ›å»ºè·¯ç½‘" << std::endl << std::endl;
+        int vertex = inputInteger(2, 'Z' - 'A' + 1, "åŸå¸‚ï¼ˆè·¯ç½‘èŠ‚ç‚¹ï¼‰ä¸ªæ•°");
         MinimumSpanningTree MST(vertex);
-        std::cout << std::endl << ">>> ³ÇÊĞ£¨Â·Íø½Úµã£©A";
+        std::cout << std::endl << ">>> åŸå¸‚ï¼ˆè·¯ç½‘èŠ‚ç‚¹ï¼‰A";
         for (int i = 1; i < vertex; i++)
-            std::cout << "¡¢" << static_cast<char>(i + 'A');
-        std::cout << " ´´½¨³É¹¦" << std::endl;
+            std::cout << "ã€" << static_cast<char>(i + 'A');
+        std::cout << " åˆ›å»ºæˆåŠŸ" << std::endl;
 
         /* Input the distance between any two cities */
-        std::cout << std::endl << ">>> ÇëÊäÈëÈÎÒâÁ½¸ö³ÇÊĞ£¨Â·Íø½Úµã£©Ö®¼äµÄ¾àÀë" << std::endl;
-        std::cout << std::endl << ">>> ÈôÁ½¸ö³ÇÊĞ£¨Â·Íø½Úµã£©Ö®¼äÃ»ÓĞÂ·ÇëÊäÈë " << SHRT_MAX << " ±íÊ¾ÊäÈëÉÏÏŞ" << std::endl << std::endl;
+        std::cout << std::endl << ">>> è¯·è¾“å…¥ä»»æ„ä¸¤ä¸ªåŸå¸‚ï¼ˆè·¯ç½‘èŠ‚ç‚¹ï¼‰ä¹‹é—´çš„è·ç¦»" << std::endl;
+        std::cout << std::endl << ">>> è‹¥ä¸¤ä¸ªåŸå¸‚ï¼ˆè·¯ç½‘èŠ‚ç‚¹ï¼‰ä¹‹é—´æ²¡æœ‰è·¯è¯·è¾“å…¥ " << SHRT_MAX << " è¡¨ç¤ºè¾“å…¥ä¸Šé™" << std::endl << std::endl;
         for (int i = 0; i < vertex; i++)
             for (int j = i + 1; j < vertex; j++) {
                 char tmp[64];
-                sprintf(tmp, "³ÇÊĞ£¨Â·Íø½Úµã£©%c ºÍ %c Ö®¼äµÄ¾àÀë", i + 'A', j + 'A');
+                sprintf(tmp, "åŸå¸‚ï¼ˆè·¯ç½‘èŠ‚ç‚¹ï¼‰%c å’Œ %c ä¹‹é—´çš„è·ç¦»", i + 'A', j + 'A');
                 MST.setWeight(i, j, inputInteger(1, SHRT_MAX, tmp));
             }
 
         /* Generate minimum spanning tree using Kruskal algorithm */
-        std::cout << std::endl << ">>> ½¨Á¢ Kruskal ×îĞ¡Éú³ÉÊ÷:" << std::endl << std::endl;
+        std::cout << std::endl << ">>> å»ºç«‹ Kruskal æœ€å°ç”Ÿæˆæ ‘:" << std::endl << std::endl;
         MST.kruskalMST();
-        std::cout << std::endl << ">>> Kruskal ×îĞ¡Éú³ÉÊ÷µÄ×ÜÈ¨ÖØÎª " << MST.getTotal() << std::endl << std::endl;
+        std::cout << std::endl << ">>> Kruskal æœ€å°ç”Ÿæˆæ ‘çš„æ€»æƒé‡ä¸º " << MST.getTotal() << std::endl << std::endl;
 
         /* Whether to exit the program */
-        std::cout << "ÊÇ·ñÍË³ö³ÌĞò [y/n]: ";
+        std::cout << "æ˜¯å¦é€€å‡ºç¨‹åº [y/n]: ";
     } while (!inputLogicalValue('n', 'y'));
     return 0;
 }
