@@ -15,10 +15,10 @@ A collection of my discrete mathematics course assignments.
 
 ## 仓库组成
 
-* [Assignment 1-1](Assignment_1_1)
+* [Assignment 1-1](Assignment_1/Assignment_1_1)
 命题逻辑联接词
 
-* [Assignment 1-2](Assignment_1_2)
+* [Assignment 1-2](Assignment_1/Assignment_1_2)
 真值表、主范式
 
 * [Assignment 2](Assignment_2)
@@ -38,4 +38,4 @@ Warshall算法求解传递闭包
 
 ## 文档更新日期
 
-2024年2月17日
+2024年2月27日
