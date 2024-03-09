@@ -10,7 +10,7 @@ A collection of my discrete mathematics course assignments.
 
 2023年同济大学离散数学课程作业合集。
 
-> Relevant course
+> ***Relevant course***
 > * Discrete Mathematics 2023 (2023年同济大学离散数学)
 
 ## 仓库组成
@@ -38,4 +38,4 @@ Warshall算法求解传递闭包
 
 ## 文档更新日期
 
-2024年2月27日
+2024年3月10日
